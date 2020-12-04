@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" class="toolbar-header">
+  <mat-toolbar-row>
+    <a class="logo"><span> DigiBP</span></a>
+
+    <span *ngIf="this.sessionData.getUsername() != ''" class="welcome">Hello {{this.sessionData.username}}</span>
+    <span class="spacer"></span>
+
+    <div class="navbar-buttonrow" *ngIf="this.sessionData.username == ''">
+      <button mat-raised-button (click)="openLogin()" color="accent">Log In</button>
+      <button mat-button routerLink="register">Register</button>
+    </div>
+    <button mat-button *ngIf="this.sessionData.username != ''" (click)="logout()">Logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+
+  <p> Businesskey:   {{ sessionData.businesskey }}</p>
+  <p> Process Instance: {{ sessionData.processInstanceID }}</p>
+  <p> Task : {{ sessionData.actualTaskID }}</p>
+  <p> Task ID: {{ sessionData.actualTaskName }}</p>
+
+  <router-outlet></router-outlet>
+</div>
+

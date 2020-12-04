@@ -1,0 +1,18 @@
+<div class="container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+
+        <mat-form-field>
+                <input id="customer_id" formControlName="customer_id" matInput placeholder="Customer ID">
+        </mat-form-field>
+
+        <mat-form-field>
+                <input type="password" id="password" formControlName="password" matInput placeholder="Password">
+        </mat-form-field>            
+
+        <div mat-dialog-actions>
+            <button mat-raised-button color="primary">Login</button>  
+        </div>
+    </form>
+
+</div>
+

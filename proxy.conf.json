@@ -1,0 +1,7 @@
+{
+    "/rest": {
+      "target": "https://digibp-lenzburg.herokuapp.com",
+      "secure": false,
+      "changeOrigin": true
+    }
+  }
