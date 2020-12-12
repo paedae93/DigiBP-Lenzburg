@@ -17,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCardModule} from '@angular/material/card';
 
 
 import { LoginComponent } from './components/login/login.component';
@@ -61,7 +62,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     MatInputModule,
     MatTableModule,
     MatProgressSpinnerModule,
-
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,13 +12,13 @@
     <button mat-button *ngIf="this.sessionData.username != ''" (click)="logout()">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>
-
+<div class="background"></div>
 <div class="container">
   <div [style.display]="sessionData.overlay" id="inner_overlay"></div>
-  <p> Businesskey:   {{ sessionData.businesskey }}</p>
+  <!-- <p> Businesskey:   {{ sessionData.businesskey }}</p>
   <p> Process Instance: {{ sessionData.processInstanceID }}</p>
   <p> Task : {{ sessionData.actualTaskID }}</p>
-  <p> Task ID: {{ sessionData.actualTaskName }}</p>
+  <p> Task ID: {{ sessionData.actualTaskName }}</p> -->
 
   <router-outlet></router-outlet>
   <div class="spinner" *ngIf="sessionData.in_progress">

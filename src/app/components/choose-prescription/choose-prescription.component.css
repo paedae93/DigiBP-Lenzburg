@@ -10,3 +10,8 @@ tr.prescriptionRow:hover{
 tr th{
   text-align: center;
 }
+
+.card{
+background-color: bisque;
+margin: 10px;
+}

@@ -3,6 +3,14 @@ table {
   }
 
 tr.productRow:hover{
-  background-color: aquamarine;
+  background-color: bisque;
    cursor: pointer;
+}
+
+tr th{
+  text-align: center;
+}
+.card{
+  background-color: bisque;
+  margin: 10px;
 }

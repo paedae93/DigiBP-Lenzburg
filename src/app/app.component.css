@@ -15,6 +15,18 @@
     align-items: stretch;
     flex-direction: column;
     text-align: center;
+
+  }
+
+  .background{
+    position: absolute;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: url('../assets/background.jpg') no-repeat center center fixed;
+    opacity: 0.2;
   }
 
   #inner_overlay {
