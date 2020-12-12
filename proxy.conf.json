@@ -1,5 +1,5 @@
 {
-    "/rest": {
+    "https://cors-anywhere.herokuapp.com/https://digibp-lenzburg.herokuapp.com/rest/": {
       "target": "https://digibp-lenzburg.herokuapp.com",
       "secure": false,
       "changeOrigin": true

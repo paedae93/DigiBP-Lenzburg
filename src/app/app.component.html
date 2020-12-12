@@ -1,8 +1,8 @@
 <mat-toolbar color="primary" class="toolbar-header">
   <mat-toolbar-row>
-    <a class="logo"><span> DigiBP</span></a>
-
-    <span *ngIf="this.sessionData.getUsername() != ''" class="welcome">Hello {{this.sessionData.username}}</span>
+    <a class="logo"><span> Digital Pharmacy </span> </a>
+    <span class="spacer"></span>
+    <span *ngIf="this.sessionData.getUsername() != ''" class="welcome">  Hello {{this.sessionData.customer_name}}</span>
     <span class="spacer"></span>
 
     <div class="navbar-buttonrow" *ngIf="this.sessionData.username == ''">
@@ -21,5 +21,8 @@
   <p> Task ID: {{ sessionData.actualTaskName }}</p>
 
   <router-outlet></router-outlet>
+  <div class="spinner" *ngIf="in_progress">
+    <mat-spinner></mat-spinner>
+  </div>
 </div>
 

@@ -15,6 +15,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 import { LoginComponent } from './components/login/login.component';
@@ -22,6 +24,11 @@ import { TakePrescriptionComponent } from './components/take-prescription/take-p
 import { ChoosePrescriptionComponent } from './components/choose-prescription/choose-prescription.component';
 import { SelectProductComponent } from './components/select-product/select-product.component';
 import { SymptomsComponent } from './components/symptoms/symptoms.component';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { SelectPaymentComponent } from './components/select-payment/select-payment.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +38,8 @@ import { SymptomsComponent } from './components/symptoms/symptoms.component';
     TakePrescriptionComponent,
     ChoosePrescriptionComponent,
     SelectProductComponent,
-    SymptomsComponent
+    SymptomsComponent,
+    SelectPaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +57,8 @@ import { SymptomsComponent } from './components/symptoms/symptoms.component';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-
+    MatTableModule,
+    MatProgressSpinnerModule,
 
   ],
   providers: [],

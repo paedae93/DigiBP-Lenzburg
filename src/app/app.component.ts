@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {LoginComponent} from './components/login/login.component';
 import { IntegromatService } from './services/integromat.service';
 import { SessionServiceService } from './services/session-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,25 +14,29 @@ import { SessionServiceService } from './services/session-service.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'DigiBP-Lenzburg';
+  title = 'Digital Pharmacy';
 
   sessionData : SessionData;
+  in_progress : boolean;
 
   constructor(
     public dialog: MatDialog,
     private IntegromatService: IntegromatService,
-    private sessionService : SessionServiceService
+    private sessionService : SessionServiceService,
+    private router : Router
   ){
     this.sessionData = this.sessionService.sessionData;
-    //this.sessionData.buisnesskey = "test";
+    this.in_progress = this.sessionData.in_progress;
+  }
 
-
+  ngOnInit(){
+    this.router.navigate(['/']);
   }
 
   logout(){
-    // this.sessionService.sessionData = new Session();
-    // this.sessionData = this.sessionService.sessionData;
-    // this.router.navigate(['login']);
+    this.sessionService.sessionData = new SessionData();
+    this.sessionData = this.sessionService.sessionData;
+    this.router.navigate(['/']);
   }
 
   openLogin(){

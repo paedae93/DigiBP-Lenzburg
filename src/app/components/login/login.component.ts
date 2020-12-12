@@ -37,16 +37,18 @@ export class LoginComponent implements OnInit {
 
   onSubmit(loginData: any){
 
+    this.sessionService.sessionData.in_progress = true;
+
     this.integromatService.login(loginData).subscribe((data) => {
 
-        
+        this.sessionService.sessionData.customer_id = Object.values(data)[1];
         this.sessionService.sessionData.businesskey = Object.values(data)[0];
+        this.sessionService.sessionData.customer_name = Object.values(data)[3] + " " + Object.values(data)[2];
         this.sessionService.sessionData.username = loginData.customer_id;
 
         this.camundaRest.getProcessInstanceByBusinessKey(this.sessionService.sessionData.businesskey).subscribe({
           next : data => {
             this.sessionService.sessionData.processInstanceID = data[0].id;
-            console.log("process instance: " + data[0].id)
             this.camundaRest.getTaskOfProcessInstanceById(this.sessionService.sessionData.processInstanceID).subscribe({
               next : data => {
 
@@ -62,10 +64,12 @@ export class LoginComponent implements OnInit {
                       this.sessionService.sessionData.actualTaskDefinitionKey = data[0].taskDefinitionKey;
 
                       this.router.navigate(['/' + this.sessionService.sessionData.actualTaskDefinitionKey]);
+                      this.sessionService.sessionData.in_progress = false;
                     });
                   });
                 }else{
                   this.router.navigate(['/' + this.sessionService.sessionData.actualTaskDefinitionKey]);
+                  this.sessionService.sessionData.in_progress = false;
                 }
                 
               }
@@ -76,9 +80,5 @@ export class LoginComponent implements OnInit {
 
         this.dialogRef.close();
     });
-    //this.loginForm.reset();
-
   }
-
-
 }

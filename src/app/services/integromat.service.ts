@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginComponent } from '../components/login/login.component';
+import { Prescription } from '../classes/Prescription';
+import { SessionServiceService } from './session-service.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,13 +17,30 @@ const httpOptions = {
 export class IntegromatService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private sessionService : SessionServiceService
     ) { }
   
   
-  getPrescriptionsForCustomer(customerID : number){
+  getPrescriptionsForCustomer(customerID : number) : Observable<Prescription[]>{
     let url = "https://hook.integromat.com/gkudovywtmsq2olxbijs66dn63y6i23y";
-    return this.http.post(url, JSON.stringify({customer_id : customerID}), httpOptions).pipe(map(resp => resp));
+    const headers = { 'content-type': 'application/json'};
+    const body = JSON.stringify({customer_id : customerID});
+    return this.http.post<Prescription[]>(url, body, { headers }).pipe(
+      map(resp => resp),
+      catchError(this.handleError('getPrescriptionsForCustomer', []))
+    );
+  }
+
+  updateOrderPrescription(prescription_id : number){
+    let url = 'https://hook.integromat.com/xp2lqfrrw7mjto3dawpzn1f36pef3qz0';
+
+    let data = {
+      "prescription_id" : prescription_id,
+      "business_key" : this.sessionService.sessionData.businesskey
+    }
+    console.log(JSON.stringify(data));
+    return this.http.post(url, JSON.stringify(data), httpOptions).pipe(map(resp => resp));
   }
 
   login(loginData : any){

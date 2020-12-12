@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProcessDefinition } from '../classes/ProcessDefinition';
 import { Task } from '../classes/Task';
+import { Suggestion } from '../classes/Suggestion';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,7 +16,7 @@ const httpOptions = {
 })
 export class CamundaRestService {
 
-  private engineRestUrl = '/rest/'
+  private engineRestUrl = 'https://cors-anywhere.herokuapp.com/https://digibp-lenzburg.herokuapp.com/rest/'
 
   constructor(private http: HttpClient) {
 
@@ -52,9 +53,17 @@ export class CamundaRestService {
     );
   }
 
+  getSuggestion(taskId: String): Observable<any> {
+    const endpoint = `${this.engineRestUrl}task/${taskId}/variables/suggestion`;
+    return this.http.get<any>(endpoint).pipe(
+      map(resp => resp),
+      catchError(this.handleError('getVariableSuggestionForTask', []))
+    );
+  }
+
   postCompleteTask(taskId: String, variables: Object): Observable<any> {
     const endpoint = `${this.engineRestUrl}task/${taskId}/complete`;
-    return this.http.post<any>(endpoint, variables).pipe(
+    return this.http.post<any>(endpoint, variables, httpOptions).pipe(
       tap(tasks => tasks = true),
       catchError(this.handleError('postCompleteTask', []))
     );

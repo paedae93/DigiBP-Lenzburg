@@ -1,0 +1,8 @@
+table {
+    width: 100%;
+  }
+
+tr.productRow:hover{
+  background-color: aquamarine;
+   cursor: pointer;
+}
