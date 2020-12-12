@@ -6,6 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProcessDefinition } from '../classes/ProcessDefinition';
 import { Task } from '../classes/Task';
 import { Suggestion } from '../classes/Suggestion';
+import { SessionServiceService } from './session-service.service';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,8 +20,27 @@ export class CamundaRestService {
 
   private engineRestUrl = 'https://cors-anywhere.herokuapp.com/https://digibp-lenzburg.herokuapp.com/rest/'
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private sessionService : SessionServiceService,
+    private router : Router
+    ) {
 
+  }
+
+  getNextTask(){
+    this.sessionService.setLoading(true);
+    this.sessionService.sessionData.status = "Get actual Task...";
+    this.getTaskOfProcessInstanceById(this.sessionService.sessionData.processInstanceID).subscribe((data)=>{
+
+      this.sessionService.sessionData.actualTaskID = data[0].id;
+      this.sessionService.sessionData.actualTaskName = data[0].name;
+      this.sessionService.sessionData.actualTaskDefinitionKey = data[0].taskDefinitionKey;
+
+      this.router.navigate(['/' + this.sessionService.sessionData.actualTaskDefinitionKey]);            
+
+      this.sessionService.setLoading(false);
+    });
   }
 
   getTasks(): Observable<Task[]> {

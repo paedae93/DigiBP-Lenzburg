@@ -32,15 +32,26 @@ export class ChoosePrescriptionComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.sessionService.setLoading(true);
+    this.sessionService.sessionData.status = "Load Prescriptions...";
+
     this.integromatSerivce.getPrescriptionsForCustomer(this.sessionService.sessionData.customer_id).subscribe((data) => {
       this.dataSource = data;
-      console.log(data);
+      this.sessionService.setLoading(false);
     });
+
+    
   }
 
   prescriptionChosen(row : PrescriptionRow){
     let chosenRow : PrescriptionRow = row;
+
+    this.sessionService.setLoading(true);
+    this.sessionService.sessionData.status = "Set Prescriptions...";
+
     this.integromatSerivce.updateOrderPrescription(row.ID).subscribe((data) => {
+
+      this.sessionService.sessionData.status = "Order Updated. Complete Task...";
 
       let vari = {
         variables : {
@@ -51,16 +62,17 @@ export class ChoosePrescriptionComponent implements OnInit {
 
       this.sessionService.sessionData.in_progress = true;
       this.camundaRESTService.postCompleteTask(this.sessionService.sessionData.actualTaskID, JSON.stringify(vari)).subscribe((data) => {
-        this.camundaRESTService.getTaskOfProcessInstanceById(this.sessionService.sessionData.processInstanceID).subscribe((data)=>{
+        // this.sessionService.sessionData.status = "Task completed. Load next Task...";
+        // this.camundaRESTService.getTaskOfProcessInstanceById(this.sessionService.sessionData.processInstanceID).subscribe((data)=>{
 
-          this.sessionService.sessionData.actualTaskID = data[0].id;
-          this.sessionService.sessionData.actualTaskName = data[0].name;
-          this.sessionService.sessionData.actualTaskDefinitionKey = data[0].taskDefinitionKey;
+        //   this.sessionService.sessionData.actualTaskID = data[0].id;
+        //   this.sessionService.sessionData.actualTaskName = data[0].name;
+        //   this.sessionService.sessionData.actualTaskDefinitionKey = data[0].taskDefinitionKey;
 
-          this.router.navigate(['/' + this.sessionService.sessionData.actualTaskDefinitionKey]);            
+        //   this.router.navigate(['/' + this.sessionService.sessionData.actualTaskDefinitionKey]);            
 
-          this.sessionService.sessionData.in_progress = false;
-        });
+        // });
+        this.camundaRESTService.getNextTask();
       })
     });
   }

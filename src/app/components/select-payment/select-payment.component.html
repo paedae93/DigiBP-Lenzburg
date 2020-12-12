@@ -1,5 +1,7 @@
-<p>select-payment works!</p>
+<p>Please choose a payment method:</p>
 
-<button mat-raised-button color="accent" (click)="payment('paypal')">Paypal</button>
-<button mat-raised-button color="accent" (click)="payment('cash')">Cash</button>
-<button mat-raised-button color="accent" (click)="payment('creditcard')">Credit Card</button>
+<div class="payment_methods">
+    <button mat-raised-button color="primary" (click)="payment('paypal')">Paypal</button>
+    <button mat-raised-button color="primary" (click)="payment('cash')">Cash</button>
+    <button mat-raised-button color="primary" (click)="payment('creditcard')">Credit Card</button>
+</div>

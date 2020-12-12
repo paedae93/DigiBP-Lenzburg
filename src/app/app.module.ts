@@ -29,6 +29,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { SelectPaymentComponent } from './components/select-payment/select-payment.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SelectPaymentComponent } from './components/select-payment/select-payme
     ChoosePrescriptionComponent,
     SelectProductComponent,
     SymptomsComponent,
-    SelectPaymentComponent
+    SelectPaymentComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

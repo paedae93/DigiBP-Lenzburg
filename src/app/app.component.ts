@@ -17,7 +17,6 @@ export class AppComponent {
   title = 'Digital Pharmacy';
 
   sessionData : SessionData;
-  in_progress : boolean;
 
   constructor(
     public dialog: MatDialog,
@@ -26,21 +25,20 @@ export class AppComponent {
     private router : Router
   ){
     this.sessionData = this.sessionService.sessionData;
-    this.in_progress = this.sessionData.in_progress;
   }
 
   ngOnInit(){
-    this.router.navigate(['/']);
+    this.router.navigate(['/welcome']);
   }
 
   logout(){
     this.sessionService.sessionData = new SessionData();
     this.sessionData = this.sessionService.sessionData;
-    this.router.navigate(['/']);
+    this.router.navigate(['/welcome']);
   }
 
   openLogin(){
-    const dialogRef = this.dialog.open(LoginComponent);
+    const dialogRef = this.dialog.open(LoginComponent, {width: '500px'});
   }
 
 

@@ -6,3 +6,7 @@ tr.prescriptionRow:hover{
   background-color: aquamarine;
    cursor: pointer;
 }
+
+tr th{
+  text-align: center;
+}

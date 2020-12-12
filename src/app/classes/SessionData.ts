@@ -7,7 +7,11 @@ export class SessionData{
     actualTaskID : String = "";
     actualTaskName : String = "";
     actualTaskDefinitionKey : String = "";
+
+    //Loader
     in_progress : boolean = false;
+    status : String = "";
+    overlay : String = "";
 
     public setUsername(pUsername: String){
         this.username = pUsername;

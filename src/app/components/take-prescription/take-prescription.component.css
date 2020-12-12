@@ -1,0 +1,10 @@
+.task{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.buttons button{
+    margin: 10px;
+}

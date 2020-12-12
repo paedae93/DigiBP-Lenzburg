@@ -21,21 +21,24 @@ export class TakePrescriptionComponent implements OnInit {
 
   proceed(answer: boolean){
     var vari = {variables:{Order_Prescribed_Product:{"value":answer}}};
-
+    this.sessionService.setLoading(true);
+    this.sessionService.sessionData.status = "Complete Task...";
 
       console.log(JSON.stringify(vari));
     this.camundaRest.postCompleteTask(this.sessionService.sessionData.actualTaskID, vari).subscribe(() => {
-      this.camundaRest.getTaskOfProcessInstanceById(this.sessionService.sessionData.processInstanceID).subscribe({
-        next : data => {
+      this.sessionService.sessionData.status = "Task successfully completed.";
+      // this.camundaRest.getTaskOfProcessInstanceById(this.sessionService.sessionData.processInstanceID).subscribe({
+      //   next : data => {
 
-          this.sessionService.sessionData.actualTaskID = data[0].id;
-          this.sessionService.sessionData.actualTaskName = data[0].name;
-          this.sessionService.sessionData.actualTaskDefinitionKey = data[0].taskDefinitionKey;
+      //     this.sessionService.sessionData.actualTaskID = data[0].id;
+      //     this.sessionService.sessionData.actualTaskName = data[0].name;
+      //     this.sessionService.sessionData.actualTaskDefinitionKey = data[0].taskDefinitionKey;
 
-          this.router.navigate(['/' + this.sessionService.sessionData.actualTaskDefinitionKey]);
+      //     this.router.navigate(['/' + this.sessionService.sessionData.actualTaskDefinitionKey]);
           
-        }
-      });
+      //   }
+      // });
+      this.camundaRest.getNextTask();
     });
   }
 

@@ -1,4 +1,6 @@
-<div class="container">
+<div class="dialog-content">
+
+    <div [style.display]="overlay" id="overlay"></div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
 
         <mat-form-field>
@@ -9,10 +11,16 @@
                 <input type="password" id="password" formControlName="password" matInput placeholder="Password">
         </mat-form-field>            
 
-        <div mat-dialog-actions>
-            <button mat-raised-button color="primary">Login</button>  
-        </div>
+    <div mat-dialog-actions class="dialog-actions">
+        <button mat-raised-button color="primary">Login</button> 
+        <button mat-raised-button color="warning" (click)="close()">Cancel</button>  
+    </div>
     </form>
+
+    <div class="spinner" *ngIf="wait">
+        <mat-spinner></mat-spinner>
+        <p>{{ status }}</p>
+    </div>
 
 </div>
 

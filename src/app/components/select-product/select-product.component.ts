@@ -27,13 +27,20 @@ export class SelectProductComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.sessionService.setLoading(true);
+    this.sessionService.sessionData.status = "Load product suggetions...";
+
     this.camundaRestSerivce.getSuggestion(this.sessionService.sessionData.actualTaskID).subscribe((data) => {
       this.suggestion = JSON.parse(String(Object.values(data)[1])).suggestion;
       this.dataSource = this.suggestion;
+      this.sessionService.setLoading(false);
     });
   }
 
   productChosen(row : any){
+
+    this.sessionService.setLoading(true);
+    this.sessionService.sessionData.status = "Set Product...";
 
     let vari = {
       variables : {
@@ -43,16 +50,8 @@ export class SelectProductComponent implements OnInit {
     }
 
     this.camundaRestSerivce.postCompleteTask(this.sessionService.sessionData.actualTaskID, JSON.stringify(vari)).subscribe((data) => {
-      this.camundaRestSerivce.getTaskOfProcessInstanceById(this.sessionService.sessionData.processInstanceID).subscribe((data)=>{
-
-        this.sessionService.sessionData.actualTaskID = data[0].id;
-        this.sessionService.sessionData.actualTaskName = data[0].name;
-        this.sessionService.sessionData.actualTaskDefinitionKey = data[0].taskDefinitionKey;
-
-        this.router.navigate(['/' + this.sessionService.sessionData.actualTaskDefinitionKey]);            
-
-        this.sessionService.sessionData.in_progress = false;
-      });
+      this.sessionService.sessionData.status = "Order updated. Task completed...";
+      this.camundaRestSerivce.getNextTask();
     });
   }
 
