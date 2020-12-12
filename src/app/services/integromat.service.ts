@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginComponent } from '../components/login/login.component';
 import { Prescription } from '../classes/Prescription';
 import { SessionServiceService } from './session-service.service';
+import { Order } from '../classes/Order';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -48,6 +49,21 @@ export class IntegromatService {
 
     return this.http.post(url, JSON.stringify(loginData), httpOptions).pipe(map(resp => resp));
   }
+
+  getOrder() : Observable<Order>{
+    let url = 'https://hook.integromat.com/kmjqcgtau9rv6ftobmfg1j3obf4ej984';
+
+    let variables = JSON.stringify({business_key : this.sessionService.sessionData.businesskey});
+
+    return this.http.post<Order>(url, variables, httpOptions).pipe(map(resp => resp));
+  }
+
+  updateOrder(order : Order){
+    let url = 'https://hook.integromat.com/3wkmguhnw3ir7i352oqllbuxxtm99fjc';
+
+    return this.http.post(url, JSON.stringify(order), httpOptions).pipe(map(resp => resp));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

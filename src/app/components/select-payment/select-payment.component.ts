@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Order } from 'src/app/classes/Order';
 import { SessionData } from 'src/app/classes/SessionData';
 import { CamundaRestService } from 'src/app/services/camunda-rest.service';
+import { IntegromatService } from 'src/app/services/integromat.service';
 import { SessionServiceService } from 'src/app/services/session-service.service';
 
 @Component({
@@ -14,6 +16,7 @@ export class SelectPaymentComponent implements OnInit {
   constructor(
     private camundaRestService : CamundaRestService,
     private sessionService : SessionServiceService,
+    private integromatService : IntegromatService,
     private router : Router
   ) { }
 
@@ -24,27 +27,21 @@ export class SelectPaymentComponent implements OnInit {
     this.sessionService.setLoading(true);
     this.sessionService.sessionData.status = "Process payment...";
 
+    let order = new Order();
+    order.payment_method = method;
+    order.status = "closed";
+    order.business_key = this.sessionService.sessionData.businesskey;
+
     this.camundaRestService.postCompleteTask(this.sessionService.sessionData.actualTaskID, "").subscribe((data) => {
-      this.sessionService.sessionData.status = "Payment successful. Task completed. Get next task....";
-      this.camundaRestService.getTaskOfProcessInstanceById(this.sessionService.sessionData.processInstanceID).subscribe((data)=>{
+      this.sessionService.sessionData.status = "Payment successful. Task completed. Update Order....";
 
-        if(data[0].taskDefinitionKey == 'Activity_16il0x1'){
-          this.camundaRestService.postCompleteTask(data[0].id, "").subscribe((data) => {
+      this.integromatService.updateOrder(order).subscribe((data) => {
 
-            this.sessionService.clearSession();
+        this.sessionService.sessionData.status = "Order updated. Get next Task...";
 
-            this.router.navigate(['/welcome']);
-            
-          })
-        }else{
-          this.sessionService.sessionData.actualTaskID = data[0].id;
-          this.sessionService.sessionData.actualTaskName = data[0].name;
-          this.sessionService.sessionData.actualTaskDefinitionKey = data[0].taskDefinitionKey;
-  
-          this.router.navigate(['/' + this.sessionService.sessionData.actualTaskDefinitionKey]); 
-        }
-
+        this.sessionService.clearSession();
         this.sessionService.setLoading(false);
+        this.router.navigate(['/welcome']);
       });
     });
   }

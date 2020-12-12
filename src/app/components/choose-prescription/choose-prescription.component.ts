@@ -62,16 +62,6 @@ export class ChoosePrescriptionComponent implements OnInit {
 
       this.sessionService.sessionData.in_progress = true;
       this.camundaRESTService.postCompleteTask(this.sessionService.sessionData.actualTaskID, JSON.stringify(vari)).subscribe((data) => {
-        // this.sessionService.sessionData.status = "Task completed. Load next Task...";
-        // this.camundaRESTService.getTaskOfProcessInstanceById(this.sessionService.sessionData.processInstanceID).subscribe((data)=>{
-
-        //   this.sessionService.sessionData.actualTaskID = data[0].id;
-        //   this.sessionService.sessionData.actualTaskName = data[0].name;
-        //   this.sessionService.sessionData.actualTaskDefinitionKey = data[0].taskDefinitionKey;
-
-        //   this.router.navigate(['/' + this.sessionService.sessionData.actualTaskDefinitionKey]);            
-
-        // });
         this.camundaRESTService.getNextTask();
       })
     });
