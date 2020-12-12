@@ -17,7 +17,7 @@ import { runInNewContext } from 'vm';
 
 export class ChoosePrescriptionComponent implements OnInit {
 
-  displayedColumns: string[] = ['ID', 'Doctor_ID', 'Symptoms', 'Product_ID'];
+  displayedColumns: string[] = ['ID', 'Doctor', 'Symptoms', 'Product'];
   dataSource : Prescription[];
 
 
