@@ -50,5 +50,5 @@
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="!row.in_stock || productChosen(row)" class="productRow"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="!row.in_stock || productChosen(row)" [class.productRow]="row.in_stock" [class.not_available]="!row.in_stock" ></tr>
   </table>

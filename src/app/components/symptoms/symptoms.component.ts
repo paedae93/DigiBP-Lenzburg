@@ -23,10 +23,10 @@ export class SymptomsComponent implements OnInit {
   }
 
   next(){
+    this.sessionService.setLoading(true);
     this.integromatSerivce.getOrder().subscribe((data) => {
       if(data.product_id != null){
 
-        this.sessionService.setLoading(true);
         this.sessionService.sessionData.status = "Order updated. Complete Task...";
 
         let vari = {

@@ -45,7 +45,7 @@ export class IntegromatService {
   }
 
   login(loginData : any){
-    let url = 'https://cors-anywhere.herokuapp.com/https://hook.integromat.com/wiq06rq41d33yacc5ombsuohpz6o9uy6';
+    let url = 'https://hook.integromat.com/wiq06rq41d33yacc5ombsuohpz6o9uy6';
 
     return this.http.post(url, JSON.stringify(loginData), httpOptions).pipe(map(resp => resp));
   }

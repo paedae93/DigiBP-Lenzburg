@@ -17,6 +17,7 @@ export class TakePrescriptionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.sessionService.setLoading(false);
   }
 
   proceed(answer: boolean){

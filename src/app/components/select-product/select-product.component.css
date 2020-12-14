@@ -14,3 +14,8 @@ tr th{
   background-color: bisque;
   margin: 10px;
 }
+
+.not_available{
+  background-color: rgb(202, 38, 38);
+  cursor: not-allowed;
+}
