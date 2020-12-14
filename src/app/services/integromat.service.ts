@@ -24,7 +24,7 @@ export class IntegromatService {
   
   
   getPrescriptionsForCustomer(customerID : number) : Observable<Prescription[]>{
-    let url = "https://hook.integromat.com/gkudovywtmsq2olxbijs66dn63y6i23y";
+    let url = "https://cors-anywhere.herokuapp.com/https://hook.integromat.com/gkudovywtmsq2olxbijs66dn63y6i23y";
     const headers = { 'content-type': 'application/json'};
     const body = JSON.stringify({customer_id : customerID});
     return this.http.post<Prescription[]>(url, body, { headers }).pipe(
@@ -34,7 +34,7 @@ export class IntegromatService {
   }
 
   updateOrderPrescription(prescription_id : number){
-    let url = 'https://hook.integromat.com/xp2lqfrrw7mjto3dawpzn1f36pef3qz0';
+    let url = 'https://cors-anywhere.herokuapp.com/https://hook.integromat.com/xp2lqfrrw7mjto3dawpzn1f36pef3qz0';
 
     let data = {
       "prescription_id" : prescription_id,
@@ -45,13 +45,13 @@ export class IntegromatService {
   }
 
   login(loginData : any){
-    let url = 'https://hook.integromat.com/wiq06rq41d33yacc5ombsuohpz6o9uy6';
+    let url = 'https://cors-anywhere.herokuapp.com/https://hook.integromat.com/wiq06rq41d33yacc5ombsuohpz6o9uy6';
 
     return this.http.post(url, JSON.stringify(loginData), httpOptions).pipe(map(resp => resp));
   }
 
   getOrder() : Observable<Order>{
-    let url = 'https://hook.integromat.com/kmjqcgtau9rv6ftobmfg1j3obf4ej984';
+    let url = 'https://cors-anywhere.herokuapp.com/https://hook.integromat.com/kmjqcgtau9rv6ftobmfg1j3obf4ej984';
 
     let variables = JSON.stringify({business_key : this.sessionService.sessionData.businesskey});
 
@@ -59,7 +59,7 @@ export class IntegromatService {
   }
 
   updateOrder(order : Order){
-    let url = 'https://hook.integromat.com/3wkmguhnw3ir7i352oqllbuxxtm99fjc';
+    let url = 'https://cors-anywhere.herokuapp.com/https://hook.integromat.com/3wkmguhnw3ir7i352oqllbuxxtm99fjc';
 
     return this.http.post(url, JSON.stringify(order), httpOptions).pipe(map(resp => resp));
   }

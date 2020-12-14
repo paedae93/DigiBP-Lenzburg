@@ -29,7 +29,9 @@ export class CamundaRestService {
   }
 
   getNextTask(){
-    this.sessionService.setLoading(true);
+    if(!this.sessionService.sessionData.overlay){
+      this.sessionService.setLoading(true);
+    }
     this.sessionService.sessionData.status = "Get actual Task...";
     this.getTaskOfProcessInstanceById(this.sessionService.sessionData.processInstanceID).subscribe((data)=>{
 

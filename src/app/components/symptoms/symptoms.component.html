@@ -1,9 +1,13 @@
-<p>symptoms works!</p>
-<iframe
-    allow="microphone;"
-    width="350"
-    height="430"
-    src="https://console.dialogflow.com/api-client/demo/embedded/aa8dbfda-d3c3-4db9-8c99-0c700aa5c90e">
-</iframe>
+<div class="symptoms">
+    <p>You are using our digital pharmacist. Just start your conversation wiht "Hi"</p>
+    <p>Your Customer ID is: {{ this.customer_id }}</p>
+    <iframe
+        allow="microphone;"
+        width="350"
+        height="430"
+        src="https://console.dialogflow.com/api-client/demo/embedded/aa8dbfda-d3c3-4db9-8c99-0c700aa5c90e">
+    </iframe>
+    
+    <button mat-raised-button color="primary" (click)="next()">Choose Product</button>
+</div>
 
-<button (click)="next()">Next</button>

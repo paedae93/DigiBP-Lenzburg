@@ -7,6 +7,7 @@ export class SessionData{
     actualTaskID : String = "";
     actualTaskName : String = "";
     actualTaskDefinitionKey : String = "";
+    password : String | undefined;
 
     //Loader
     in_progress : boolean = false;

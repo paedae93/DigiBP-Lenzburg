@@ -1,0 +1,10 @@
+.symptoms{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*margin-top: 60px;*/
+}
+
+button{
+    margin: 10px;
+}

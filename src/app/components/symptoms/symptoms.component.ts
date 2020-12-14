@@ -11,6 +11,8 @@ import { SessionServiceService } from 'src/app/services/session-service.service'
 })
 export class SymptomsComponent implements OnInit {
 
+  customer_id = this.sessionService.sessionData.customer_id;
+
   constructor(
     private integromatSerivce : IntegromatService,
     private camundaRestService : CamundaRestService,
@@ -29,7 +31,8 @@ export class SymptomsComponent implements OnInit {
 
         let vari = {
           variables : {
-            Product_ID : {"value" : data.product_id}
+            Product_ID : {"value" : data.product_id},
+            Prescription_ID : {"value" : "NONE"}
           }
         }
 

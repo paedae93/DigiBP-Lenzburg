@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ChoosePrescriptionComponent } from './components/choose-prescription/choose-prescription.component';
+import { ProcessedComponent } from './components/processed/processed.component';
 import { SelectPaymentComponent } from './components/select-payment/select-payment.component';
 import { SelectProductComponent } from './components/select-product/select-product.component';
 import { SymptomsComponent } from './components/symptoms/symptoms.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'Activity_06kwk7g', component: ChoosePrescriptionComponent },
   { path: 'Activity_0ul4i93', component: SelectProductComponent },
   { path: 'Activity_0e6veoe', component: SymptomsComponent },
-  { path : 'Activity_0v33c4r', component: SelectPaymentComponent}
+  { path: 'Activity_0v33c4r', component: SelectPaymentComponent},
+  { path: 'processed', component: ProcessedComponent }
 ];
 
 @NgModule({

@@ -37,11 +37,12 @@ export class SelectPaymentComponent implements OnInit {
 
       this.integromatService.updateOrder(order).subscribe((data) => {
 
-        this.sessionService.sessionData.status = "Order updated. Get next Task...";
+        this.sessionService.sessionData.status = "Order updated...";
 
-        this.sessionService.clearSession();
         this.sessionService.setLoading(false);
-        this.router.navigate(['/welcome']);
+        this.router.navigate(['/processed']);
+        // this.sessionService.clearSession();
+        // this.router.navigate(['/welcome']);
       });
     });
   }
